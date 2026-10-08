@@ -769,6 +769,70 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
   border:6px solid var(--white); transform:rotate(-1deg);
 }
 .team-photo-card img{width:100%; display:block;}
+
+/* ============ WEP impact numbers ============ */
+.wep-impact{max-width:620px; margin:0 auto 46px;}
+.wep-impact-kicker{text-align:center; margin-bottom:18px;}
+.wep-impact-hero{
+  display:flex; align-items:center; justify-content:center; gap:16px; background:var(--white);
+  border-radius:24px; padding:28px 22px 22px; box-shadow:var(--shadow-lift); border-top:6px solid var(--sky);
+  flex-wrap:wrap;
+}
+.wep-impact-hero .stat{text-align:center;}
+.wep-impact-hero .num{font-family:"Fredoka",sans-serif; font-weight:800; font-size:clamp(34px,7vw,52px); line-height:1;}
+.wep-impact-hero .num.before{color:var(--ink-faint);}
+.wep-impact-hero .num.after{color:var(--sky);}
+.wep-impact-hero .stat-label{
+  display:block; font-family:"Space Mono",monospace; font-size:10.5px; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--ink-faint); margin-top:4px;
+}
+.wep-impact-hero .arrow{font-size:26px; color:var(--ink-faint); flex-shrink:0;}
+.wep-impact-badge-row{text-align:center; margin-top:16px;}
+.wep-impact-badge{
+  display:inline-block; font-family:"Fredoka",sans-serif; font-weight:700; font-size:13.5px;
+  color:var(--ink); background:var(--sky); padding:8px 18px; border-radius:999px;
+}
+.wep-stat-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:22px;}
+.wep-stat-tile{
+  position:relative; background:var(--white); border-radius:18px; padding:20px 16px; text-align:center; box-shadow:var(--shadow);
+  transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
+  isolation:isolate; overflow:visible; border:2px solid transparent;
+}
+.wep-stat-tile::after{
+  content:''; position:absolute; inset:-14px; z-index:-1; border-radius:28px; opacity:0;
+  background:radial-gradient(circle, rgba(93,156,236,.5), rgba(155,127,224,.3) 55%, transparent 75%);
+  filter:blur(16px); transition:opacity .4s ease;
+  pointer-events:none;
+}
+.wep-stat-tile:hover{
+  transform:translateY(-10px) scale(1.04);
+  border-color:var(--sky);
+  box-shadow:0 28px 50px rgba(75,50,140,.3), 0 0 0 4px rgba(95,194,234,.18);
+}
+.wep-stat-tile:hover::after{opacity:1;}
+.wep-stat-tile .num{font-family:"Fredoka",sans-serif; font-weight:800; font-size:clamp(23px,4vw,29px); color:var(--ink); line-height:1;}
+.wep-stat-tile .num .unit{font-size:.62em; font-weight:700;}
+.wep-stat-tile .label{font-size:11.5px; color:var(--ink-soft); line-height:1.5; margin-top:7px;}
+@media (max-width:480px){
+  .wep-impact-hero{gap:10px; padding:24px 16px 18px;}
+}
+
+/* ---- scroll-reveal + count-up animation ---- */
+.wep-reveal{opacity:0; transform:translateY(24px) scale(.96); transition:opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);}
+.wep-impact.in-view .wep-reveal{opacity:1; transform:translateY(0) scale(1);}
+.wep-impact.in-view .wep-impact-hero{transition-delay:0s;}
+.wep-impact.in-view .wep-impact-badge-row .wep-reveal{transition-delay:.25s;}
+.wep-impact.in-view .wep-stat-tile:nth-of-type(1){transition-delay:.4s;}
+.wep-impact.in-view .wep-stat-tile:nth-of-type(2){transition-delay:.52s;}
+.wep-impact.in-view .wep-stat-tile:nth-of-type(3){transition-delay:.64s;}
+.wep-impact.in-view .wep-stat-tile:nth-of-type(4){transition-delay:.76s;}
+.wep-impact-badge{transform:scale(.85); transition:transform .45s cubic-bezier(.34,1.56,.64,1); transition-delay:.55s;}
+.wep-impact.in-view .wep-impact-badge{transform:scale(1);}
+.wep-impact-hero .arrow{opacity:0; transition:opacity .4s ease .5s;}
+.wep-impact.in-view .wep-impact-hero .arrow{opacity:1;}
+@media (prefers-reduced-motion: reduce){
+  .wep-reveal, .wep-impact-badge, .wep-impact-hero .arrow{opacity:1 !important; transform:none !important; transition:none !important;}
+}
 </style>
 
 <nav class="nav">
@@ -866,6 +930,44 @@ button{font:inherit; color:inherit; background:none; border:none; cursor:pointer
     <p class="sec-dek">Working on WEP meant communicating a simple idea: women shouldn’t have to figure out entrepreneurship alone. From ATR and WeRise to AI by HER, WEP Cares and Financing Women Collaborative, I worked across campaigns, content and communications that brought these opportunities closer to women entrepreneurs.</p>
   </div>
   <div class="wrap" style="--dot:var(--sky); padding-bottom:56px;">
+
+    <div class="wep-impact" id="wep-impact">
+      <div class="wep-impact-kicker wep-reveal">
+        <span class="sec-kicker" style="background:var(--sky);">The Impact</span>
+      </div>
+      <div class="wep-impact-hero wep-reveal">
+        <div class="stat">
+          <div class="num before" data-count="35" data-suffix="K">0K</div>
+          <span class="stat-label">2018&ndash;2024</span>
+        </div>
+        <span class="arrow">&#8594;</span>
+        <div class="stat">
+          <div class="num after" data-count="105" data-suffix="K">0K</div>
+          <span class="stat-label">Post-campaign</span>
+        </div>
+      </div>
+      <div class="wep-impact-badge-row">
+        <span class="wep-impact-badge wep-reveal">&#128640; 3x growth in registered women entrepreneurs</span>
+      </div>
+      <div class="wep-stat-grid">
+        <div class="wep-stat-tile wep-reveal">
+          <div class="num"><span data-count="62.34" data-decimals="2">0</span><span class="unit">%</span></div>
+          <div class="label">Engagement rate, with a 5m 14s avg. session that beats the 2-4 min industry standard</div>
+        </div>
+        <div class="wep-stat-tile wep-reveal">
+          <div class="num"><span data-count="800">0</span></div>
+          <div class="label">Mentors in the network, doubled from 400</div>
+        </div>
+        <div class="wep-stat-tile wep-reveal">
+          <div class="num"><span data-count="5000" data-format="comma">0</span><span class="unit">+</span></div>
+          <div class="label">Women directly engaged through the campaign</div>
+        </div>
+        <div class="wep-stat-tile wep-reveal">
+          <div class="num"><span data-count="50">0</span><span class="unit">+</span></div>
+          <div class="label">Strategic partnerships built along the way</div>
+        </div>
+      </div>
+    </div>
 
     <div class="board" id="wep-board">
       <svg class="board-svg" id="wep-board-svg"></svg>
@@ -1489,4 +1591,60 @@ function initConnectors(){
 }
 window.addEventListener('load', initConnectors);
 window.addEventListener('resize', initConnectors);
+
+function animateCount(el, duration){
+  const target = parseFloat(el.dataset.count);
+  const decimals = parseInt(el.dataset.decimals || '0', 10);
+  const suffix = el.dataset.suffix || '';
+  const format = el.dataset.format || '';
+  const start = performance.now();
+  function frame(now){
+    let p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const val = target * eased;
+    let text = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toString();
+    if(format === 'comma'){
+      const parts = text.split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      text = parts.join('.');
+    }
+    el.textContent = text + suffix;
+    if(p < 1){ requestAnimationFrame(frame); }
+  }
+  requestAnimationFrame(frame);
+}
+
+function initWepImpactAnimation(){
+  const section = document.getElementById('wep-impact');
+  if(!section) return;
+  const counters = section.querySelectorAll('[data-count]');
+  function resetCounters(){
+    counters.forEach(el => {
+      const suffix = el.dataset.suffix || '';
+      el.textContent = (el.dataset.decimals ? (0).toFixed(parseInt(el.dataset.decimals,10)) : '0') + suffix;
+    });
+  }
+  function playCounters(){
+    counters.forEach(el => animateCount(el, 1400));
+  }
+  if(!('IntersectionObserver' in window)){
+    section.classList.add('in-view');
+    playCounters();
+    return;
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        section.classList.add('in-view');
+        resetCounters();
+        playCounters();
+      } else {
+        section.classList.remove('in-view');
+        resetCounters();
+      }
+    });
+  }, { threshold: 0.25 });
+  observer.observe(section);
+}
+window.addEventListener('load', initWepImpactAnimation);
 </script>
